@@ -1,3 +1,5 @@
+#!/home/codespace/.python/current/bin/python
+
 import importlib
 import os
 import subprocess
@@ -21,35 +23,31 @@ class ConnectFour:
             self.id = id
             self.disc = disc
     
-    # class Player:  # Modify Player so I can use smaller data in grid
-    #     def __init__(self, disc_id: int, name: str, repr: str):
-    #         self.disc = disc_id
-    #         self.name = name
-    #         self.repr = repr
-
     # Grid settings
-    ROWS        = 6
-    COLUMNS     = 7
-    SPACING     = '  '  # '  ' if os.name == 'nt' else ' '
+    ROWS         = 6
+    COLUMNS      = 7
+    SPACING      = '  ' #if os.name == 'nt' else ' '
     
     # Terminal color codes to modify text output
-    __WHITE     = "\033[0m"
-    __GRAY      = "\033[30m"
-    __RED       = "\033[31m"
-    __YELLOW    = "\033[33m"
+    __WHITE      = "\033[0m"
+    __GRAY       = "\033[30m"
+    __RED        = "\033[31m"
+    __YELLOW     = "\033[33m"
+    
+    DEFAULT_SLOT = __WHITE if os.name == 'nt' else __GRAY
     
     # Slot status using unicode symbols
-    __FILLED    = "\u25CF"  # ◯
-    __HOLLOW    = "\u25EF"  # ●
+    __FILLED     = "\u25CF"  # ●
+    __HOLLOW     = "\u25CB"  # ○
     
     # Adding color to visuals
-    __SLOT      = f"{__GRAY}{__HOLLOW}{__WHITE}"    #   Gray ◯ symbol
-    R_DISC      = f"{__RED}{__FILLED}{__WHITE}"     #    Red ● symbol
-    Y_DISC      = f"{__YELLOW}{__FILLED}{__WHITE}"  # Yellow ● symbol
-    HOW_TO_PLAY = "Press '0' to stop the game\nDrop your disc using numbers (1-7)"
+    __SLOT       = f"{DEFAULT_SLOT}{__HOLLOW}{__WHITE}"  #   Gray ○ symbol
+    R_DISC       = f"{__RED}{__FILLED}{__WHITE}"         #    Red ● symbol
+    Y_DISC       = f"{__YELLOW}{__FILLED}{__WHITE}"      # Yellow ● symbol
+    HOW_TO_PLAY  = "Press '0' to stop the game\nDrop your disc using numbers (1-7)"
     
     # Valid inputs
-    VALID_KEYS  = list("01234567")
+    VALID_KEYS   = list("01234567")
 
     def __init__(self):
         self.__grid       = [
@@ -110,7 +108,7 @@ class ConnectFour:
 
     def __end_game(self, message):
         self.__running     = False
-        self.__end_message = message
+        self.__end_message = f"{message}{self.__WHITE}\n"
     
     def play(self):
         self.__running        = True
