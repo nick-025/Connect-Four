@@ -1,5 +1,3 @@
-#!/home/codespace/.python/current/bin/python
-
 import importlib
 import os
 import subprocess
